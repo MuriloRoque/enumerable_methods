@@ -18,6 +18,15 @@ module Enumerable
     end
   end
 
+  def my_select
+    result=[]
+    my_each do |n|
+      result.push(n) if yield(n) 
+      n += 1
+    end
+    return result
+  end
+
 end
 
 # rubocop: enable Metrics/ModuleLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -31,4 +40,8 @@ end
 arr.my_each_with_index do |n, m|
   print " #{m}:"
   print n*2
+end
+
+arr.my_select do |n|
+  n%2==0
 end
