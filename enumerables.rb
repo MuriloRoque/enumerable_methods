@@ -1,7 +1,6 @@
-# rubocop: disable Metrics/ModuleLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop: disable Metrics/ModuleLength
 
 module Enumerable
-
   def my_each
     return to_enum unless block_given?
     n = 0
@@ -116,7 +115,7 @@ module Enumerable
   end
 end
 
-# rubocop: enable Metrics/ModuleLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+# rubocop: enable Metrics/ModuleLength
 
 def multiply_els(arr)
   arr.my_inject(2){ |product, n| product * n}
