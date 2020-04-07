@@ -3,8 +3,9 @@
 module Enumerable
   def my_each
     return to_enum unless block_given?
+
     n = 0
-    while n <= size-1
+    while n <= size - 1
       yield(to_a[n])
       n += 1
     end
@@ -12,8 +13,9 @@ module Enumerable
 
   def my_each_with_index
     return to_enum unless block_given?
+
     n = 0
-    while n <= size-1
+    while n <= size - 1
       yield(to_a[n], n)
       n += 1
     end
@@ -21,57 +23,58 @@ module Enumerable
 
   def my_select
     return to_enum unless block_given?
-    result=[]
+
+    result = []
     my_each do |n|
-      result.push(n) if yield(n) 
+      result.push(n) if yield(n)
     end
     result
   end
 
   def my_all?(var = nil)
-    result=true
+    result = true
     my_each do |n|
       if block_given?
-        result=false unless yield(n)
+        result = false unless yield(n)
       elsif var.nil?
-        result=false unless n
+        result = false unless n
       else
-        result=false unless var===n
+        result = false unless var === n
       end
     end
     result
   end
 
-  def my_any?(var=nil)
-    result=false
+  def my_any?(var = nil)
+    result = false
     my_each do |n|
       if block_given?
-        return result=true if yield(n)
+        return result = true if yield(n)
       elsif var.nil?
-        return result=true unless n
+        return result = true unless n
       else
-        return result=true unless var===n
+        return result = true unless var === n
       end
     end
     result
   end
 
-  def my_none?(var=nil)
-    result=true
+  def my_none?(var = nil)
+    result = true
     my_each do |n|
       if block_given?
-        return result=false if yield(n)
+        return result = false if yield(n)
       elsif var.nil?
-        return result=false unless n
+        return result = false unless n
       else
-        return result=false unless var===n
+        return result = false unless var === n
       end
     end
     result
   end
 
-  def my_count(var=nil)
-    result=[]
+  def my_count(var = nil)
+    result = []
     if block_given?
       my_each do |n|
         result.push(n) if yield(n) 
@@ -80,14 +83,14 @@ module Enumerable
       return self.length
     else
       my_each do |n|
-        result.push(n) if n==var
+        result.push(n) if n == var
       end
     end
     result.length
   end
 
-  def my_map(var=nil)
-    result=[]
+  def my_map(var = nil)
+    result = []
     return to_enum unless block_given? && var.nil?
     if var
       my_each do |n|
@@ -101,15 +104,15 @@ module Enumerable
     result
   end
 
-  def my_inject(var=nil)
+  def my_inject(var = nil)
     return to_enum unless block_given?
     if var
-      result=var
+      result = var
     elsif var.nil?
-      result=self[0]
+      result = self[0]
     end
     my_each do |n|
-      result=yield(result, n)
+      result = yield(result, n)
     end
     result
   end
