@@ -86,6 +86,15 @@ module Enumerable
     end
     result.length
   end
+
+  def my_map
+    result=[]
+    return to_enum unless block_given?
+    my_each do |n|
+      result.push(yield(n))
+    end
+    result
+  end
 end
 
 # rubocop: enable Metrics/ModuleLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -97,13 +106,13 @@ arr.my_each do |n|
   print " "
 end
 
-print "\n"
+print "\n\n"
 
 arr.my_each_with_index do |n, m|
   print "#{m}:#{n*2} / "
 end
 
-print "\n"
+print "\n\n"
 
 puts [1,2,3,4,5].my_select { |num|  num.even?  }
 
@@ -119,15 +128,15 @@ print "\n"
 
 puts ["ant", "bear", "cat"].my_none? { |word| word.length >=4 }
 
+print "\n"
+
 ary = [1, 2, 4, 2]
 puts ary.my_count
 
-print "\n"
-
 puts ary.my_count(2)
-
-print "\n"
 
 puts ary.my_count{ |x| x%2==0 }
 
 print "\n"
+
+puts (1..4).map { |i| i*i }
