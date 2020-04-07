@@ -6,7 +6,7 @@ In this project I:
 
 - Used Ruby to implement the algorithms;
 - Built various enumerable methods: my_each, my_each_with_index, my_select, my_all?, my_any?, my_none?, my_count, my_map and my_inject;
-- Tested the methods with tthe official Enumerables documentation examples, found in this [link.](https://ruby-doc.org/core-2.6.5/Enumerable.html)
+- Tested the methods with the official Enumerables documentation examples, found in this [link.](https://ruby-doc.org/core-2.6.5/Enumerable.html)
 
 # What it does
 

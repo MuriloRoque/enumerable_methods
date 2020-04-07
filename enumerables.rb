@@ -111,3 +111,7 @@ module Enumerable
 end
 
 # rubocop: enable Metrics/ModuleLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
+def multiply_els(arr=nil)
+  arr.my_inject(2){ |product, n| product * n}
+end
