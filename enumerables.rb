@@ -6,7 +6,7 @@ module Enumerable
     return to_enum unless block_given?
     n = 0
     while n <= size-1
-      yield(self[n])
+      yield(to_a[n])
       n += 1
     end
   end
@@ -15,7 +15,7 @@ module Enumerable
     return to_enum unless block_given?
     n = 0
     while n <= size-1
-      yield(self[n], n)
+      yield(to_a[n], n)
       n += 1
     end
   end
@@ -95,6 +95,19 @@ module Enumerable
     end
     result
   end
+
+  def my_inject(var=nil)
+    return to_enum unless block_given?
+    if var
+      result=var
+    elsif var.nil?
+      result=self[0]
+    end
+    my_each do |n|
+      result=yield(result, n)
+    end
+    result
+  end
 end
 
 # rubocop: enable Metrics/ModuleLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
@@ -139,4 +152,8 @@ puts ary.my_count{ |x| x%2==0 }
 
 print "\n"
 
-puts (1..4).map { |i| i*i }
+puts (1..4).my_map { |i| i*i }
+
+print "\n"
+
+puts (5..10).inject(1) { |product, n| product * n }
