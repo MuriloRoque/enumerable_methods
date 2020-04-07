@@ -87,11 +87,17 @@ module Enumerable
     result.length
   end
 
-  def my_map
+  def my_map(var=nil)
     result=[]
-    return to_enum unless block_given?
-    my_each do |n|
-      result.push(yield(n))
+    return to_enum unless block_given? && var.nil?
+    if var
+      my_each do |n|
+        result.push(var.call(n))
+      end
+    else
+      my_each do |n|
+        result.push(yield(n))
+      end
     end
     result
   end
@@ -112,6 +118,6 @@ end
 
 # rubocop: enable Metrics/ModuleLength, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
-def multiply_els(arr=nil)
+def multiply_els(arr)
   arr.my_inject(2){ |product, n| product * n}
 end
