@@ -5,10 +5,10 @@ module Enumerable
     return to_enum unless block_given?
 
     n = if var.nil?
-      0
-    else
-      var
-    end
+          0
+        else
+          var
+        end
     while n <= size - 1
       yield(to_a[n])
       n += 1
