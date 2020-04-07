@@ -4,10 +4,10 @@ module Enumerable
   def my_each(var = nil)
     return to_enum unless block_given?
 
-    if var.nil?
-      n = 0
+    n = if var.nil?
+      0
     else
-      n = var
+      var
     end
     while n <= size - 1
       yield(to_a[n])
