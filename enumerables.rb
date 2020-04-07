@@ -1,13 +1,21 @@
-# rubocop: disable Metrics/ModuleLength
+# rubocop: disable Metrics/ModuleLength, Style/CaseEquality
 
 module Enumerable
-  def my_each
+  def my_each(var = nil)
     return to_enum unless block_given?
 
-    n = 0
-    while n <= size - 1
-      yield(to_a[n])
-      n += 1
+    if var.nil?
+      n = 0
+      while n <= size - 1
+        yield(to_a[n])
+        n += 1
+      end
+    else
+      n = var
+      while n <= size - 1
+        yield(to_a[n])
+        n += 1
+      end
     end
   end
 
@@ -39,7 +47,7 @@ module Enumerable
       elsif var.nil?
         result = false unless n
       else
-        result = false unless var == n
+        result = false unless var === n
       end
     end
     result
@@ -51,9 +59,9 @@ module Enumerable
       if block_given?
         return result = true if yield(n)
       elsif var.nil?
-        return result = true unless n
+        return result = true if n
       else
-        return result = true unless var == n
+        return result = true if var === n
       end
     end
     result
@@ -65,9 +73,9 @@ module Enumerable
       if block_given?
         return result = false if yield(n)
       elsif var.nil?
-        return result = false unless n
+        return result = false if n
       else
-        return result = false unless var == n
+        return result = false if var === n
       end
     end
     result
@@ -106,22 +114,28 @@ module Enumerable
   end
 
   def my_inject(var = nil)
-    return to_enum unless block_given?
-
     if var
-      result = var
+      if var.is_a?(Symbol)
+        result = self[0]
+        my_each(1) do |n|
+          result = result.method(var).call(n)
+        end
+        return result
+      else
+        result = var
+      end
     elsif var.nil?
       result = self[0]
     end
-    my_each do |n|
+    my_each(1) do |n|
       result = yield(result, n)
     end
     result
   end
 end
 
-# rubocop: enable Metrics/ModuleLength
+# rubocop: disable Metrics/ModuleLength, Style/CaseEquality
 
 def multiply_els(arr)
-  arr.my_inject(2) { |product, n| product * n }
+  arr.my_inject { |product, n| product * n }
 end
