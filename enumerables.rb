@@ -39,7 +39,7 @@ module Enumerable
       elsif var.nil?
         result = false unless n
       else
-        result = false unless var === n
+        result = false unless var == n
       end
     end
     result
@@ -53,7 +53,7 @@ module Enumerable
       elsif var.nil?
         return result = true unless n
       else
-        return result = true unless var === n
+        return result = true unless var == n
       end
     end
     result
@@ -67,7 +67,7 @@ module Enumerable
       elsif var.nil?
         return result = false unless n
       else
-        return result = false unless var === n
+        return result = false unless var == n
       end
     end
     result
@@ -77,10 +77,10 @@ module Enumerable
     result = []
     if block_given?
       my_each do |n|
-        result.push(n) if yield(n) 
+        result.push(n) if yield(n)
       end
     elsif var.nil?
-      return self.length
+      return length
     else
       my_each do |n|
         result.push(n) if n == var
@@ -92,6 +92,7 @@ module Enumerable
   def my_map(var = nil)
     result = []
     return to_enum unless block_given? && var.nil?
+
     if var
       my_each do |n|
         result.push(var.call(n))
@@ -106,6 +107,7 @@ module Enumerable
 
   def my_inject(var = nil)
     return to_enum unless block_given?
+
     if var
       result = var
     elsif var.nil?
@@ -121,5 +123,5 @@ end
 # rubocop: enable Metrics/ModuleLength
 
 def multiply_els(arr)
-  arr.my_inject(2){ |product, n| product * n}
+  arr.my_inject(2) { |product, n| product * n }
 end
