@@ -1,4 +1,4 @@
-# rubocop: disable Metrics/ModuleLength, Style/CaseEquality
+# rubocop: disable Metrics/ModuleLength, Style/CaseEquality, Style/IfInsideElse
 
 module Enumerable
   def my_each(var = nil)
@@ -6,16 +6,12 @@ module Enumerable
 
     if var.nil?
       n = 0
-      while n <= size - 1
-        yield(to_a[n])
-        n += 1
-      end
     else
       n = var
-      while n <= size - 1
-        yield(to_a[n])
-        n += 1
-      end
+    end
+    while n <= size - 1
+      yield(to_a[n])
+      n += 1
     end
   end
 
@@ -134,7 +130,7 @@ module Enumerable
   end
 end
 
-# rubocop: disable Metrics/ModuleLength, Style/CaseEquality
+# rubocop: enable Metrics/ModuleLength, Style/CaseEquality, Style/IfInsideElse
 
 def multiply_els(arr)
   arr.my_inject { |product, n| product * n }
