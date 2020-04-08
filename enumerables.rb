@@ -116,9 +116,9 @@ module Enumerable
         end
       elsif var.is_a? Integer
         result = var
-          my_each do |n|
-            result = yield(result, n)
-          end
+        my_each do |n|
+          result = yield(result, n)
+        end
       else
         my_each(1) do |n|
           result = var.call(n)
@@ -135,7 +135,7 @@ module Enumerable
   end
 end
 
-# rubocop: enable Metrics/ModuleLength, Style/CaseEquality, Style/IfInsideElse
+# rubocop: enable Metrics/ModuleLength, Metrics/MethodLength, Style/CaseEquality, Style/IfInsideElse
 
 def multiply_els(arr)
   arr.my_inject { |product, n| product * n }
