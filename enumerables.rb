@@ -1,4 +1,4 @@
-# rubocop: disable Metrics/ModuleLength, Style/CaseEquality, Style/IfInsideElse
+# rubocop: disable Metrics/ModuleLength, Metrics/MethodLength, Style/CaseEquality, Style/IfInsideElse
 
 module Enumerable
   def my_each(var = nil)
@@ -114,19 +114,17 @@ module Enumerable
         my_each(1) do |n|
           result = result.method(var).call(n)
         end
-        return result
       elsif var.is_a? Integer
         result = var
           my_each do |n|
             result = yield(result, n)
           end
-          return result
       else
         my_each(1) do |n|
           result = var.call(n)
         end
-        return result
       end
+      return result
     else
       result = to_a[0]
       my_each(1) do |n|
