@@ -95,15 +95,13 @@ module Enumerable
 
   def my_map(var = nil)
     result = []
-    return to_enum unless block_given? && var.nil?
-
-    if var
+    if block_given? && var.nil?
       my_each do |n|
-        result.push(var.call(n))
+        result.push(yield(n))
       end
     else
       my_each do |n|
-        result.push(yield(n))
+        result.push(var.call(n))
       end
     end
     result
@@ -111,20 +109,29 @@ module Enumerable
 
   def my_inject(var = nil)
     if var
-      if var.is_a?(Symbol)
-        result = self[0]
+      if var.is_a? Symbol
+        result = to_a[0]
         my_each(1) do |n|
           result = result.method(var).call(n)
         end
         return result
-      else
+      elsif var.is_a? Integer
         result = var
+          my_each do |n|
+            result = yield(result, n)
+          end
+          return result
+      else
+        my_each(1) do |n|
+          result = var.call(n)
+        end
+        return result
       end
-    elsif var.nil?
-      result = self[0]
-    end
-    my_each(1) do |n|
-      result = yield(result, n)
+    else
+      result = to_a[0]
+      my_each(1) do |n|
+        result = yield(result, n)
+      end
     end
     result
   end
