@@ -94,6 +94,8 @@ module Enumerable
   end
 
   def my_map(var = nil)
+    return to_enum unless block_given? || var
+
     result = []
     if block_given? && var.nil?
       my_each do |n|
@@ -107,12 +109,17 @@ module Enumerable
     result
   end
 
-  def my_inject(var = nil)
+  def my_inject(var = nil, var2 = nil)
     if var
       if var.is_a? Symbol
         result = to_a[0]
         my_each(1) do |n|
           result = result.method(var).call(n)
+        end
+      elsif var2.is_a? Symbol
+        result = var
+        my_each do |n|
+          result = result.method(var2).call(n)
         end
       elsif var.is_a? Integer
         result = var
