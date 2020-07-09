@@ -8,6 +8,8 @@ In this project I:
 - Built various enumerable methods: my_each, my_each_with_index, my_select, my_all?, my_any?, my_none?, my_count, my_map and my_inject;
 - Tested the methods with the official Enumerables documentation examples, found in this [link.](https://ruby-doc.org/core-2.6.5/Enumerable.html)
 
+![screenshot](images/screenshot.png)
+
 # What it does
 
 This software can do almost anything you want with any arrays, from sorting them to making basic operations with its items.
@@ -28,11 +30,11 @@ You will be redirected to a webpage where you can provide arrays and blocks whic
 
 Murilo Roque Paiva da Silva
 
-Github: @MuriloRoque
+Github: [@MuriloRoque](https://github.com/MuriloRoque)
 
-Twitter: @MuriloRoquePai1
+Twitter: [@MuriloRoquePai1](https://twitter.com/MuriloRoquePai1)
 
-Linkedin: https://www.linkedin.com/in/murilo-roque-b1268741/
+Linkedin: [MuriloRoque](https://www.linkedin.com/in/murilo-roque-b1268741/)
 
 ## 🤝 Contributing
 
